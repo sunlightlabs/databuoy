@@ -1,0 +1,9 @@
+{
+  "name": "Databuoy",
+  "description": "a spreadsheet-backed open data portal",
+  "version": "0.0.0",
+  "dependencies": {
+    "tabletop": "1.4.2",
+    "jquery": "2.1.4"
+  }
+}
