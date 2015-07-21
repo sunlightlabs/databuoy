@@ -1,0 +1,11 @@
+{
+  "name": "Databuoy",
+  "version": "0.0.0",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-sass": "~0.18.0",
+    "node-sass": "~2.0.1"
+  }
+}
