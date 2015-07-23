@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       },
 
       concat: {
-        files: 'src/js/*.js',
+        files: 'src/js/**/**.js',
         tasks: ['build']
       }
     },
@@ -23,7 +23,8 @@ module.exports = function(grunt) {
         src: [
         'bower_components/tabletop/src/tabletop.js',
         'bower_components/jquery/dist/jquery.min.js',
-        'src/js/*.js'],
+        'src/js/modules/*.js',
+        'src/js/main.js'],
         dest: 'dist/built.js',
       },
     },
