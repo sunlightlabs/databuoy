@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       },
 
       concat: {
-        files: 'src/js/**/**.js',
+        files: ['src/js/modules/*.js', 'src/js/components/datasets.js', 'src/js/*.js'],
         tasks: ['build']
       }
     },
@@ -20,9 +20,14 @@ module.exports = function(grunt) {
             sourceMap: true
         },
         dist: {
-            files: {
-                'tmp/js/compiled.js':'src/js/main.js'
-            }
+            files: [
+                 {
+                     expand: true,
+                     cwd: 'src/js/',
+                     src: ['**/**.js'],
+                     dest: 'tmp/js'
+                 }
+             ]
         }
     },
     concat: {
@@ -32,10 +37,11 @@ module.exports = function(grunt) {
       dist: {
         src: [
         'bower_components/tabletop/src/tabletop.js',
-        'bower_components/react/react.js',
+        'bower_components/react/react-with-addons.js',
         'bower_components/jquery/dist/jquery.min.js',
-        'src/js/modules/*.js',
-        'tmp/js/compiled.js'],
+        'tmp/js/components/*.js',
+        'tmp/js/modules/*.js',
+        'tmp/js/main.js'],
         dest: 'dist/js/built.js',
       },
     },
