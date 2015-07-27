@@ -1,3 +1,10 @@
-body {
-  color: black;
+table {
+  thead {
+    tr {
+      td {
+       text-align: center;
+       font-weight: bold;
+      }
+    }
+  }
 }
