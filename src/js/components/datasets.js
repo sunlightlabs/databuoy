@@ -90,8 +90,8 @@ var Dataset = React.createClass({
         <td className="landingPage">{this.props.data.landingPage}</td>
         <td className="references">{this.props.data.references}</td>
         <td className="theme">{this.props.data.theme}</td>
-        <td className="contactPoint_fn">{this.props.data.contactPoint}</td>
-        <td className="contactPoint_hasEmail">{this.props.data.contactPoint}</td>
+        <td className="contactPoint_fn">{this.props.data.contactPoint.fn}</td>
+        <td className="contactPoint_hasEmail">{this.props.data.contactPoint.hasEmail}</td>
       </tr>
     );
   }
