@@ -71,7 +71,7 @@ var Dataset = React.createClass({
       <tr>
         <td className="title">{this.props.data.title}</td>
         <td className="description">{this.props.data.description}</td>
-        <td className="keyword">{this.props.data.keyword}</td>
+        <td className="keyword">{Utils.parseKeywords(this.props.data.keyword)}</td>
         <td className="modified">{this.props.data.modified}</td>
         <td className="publisher">{this.props.data.publisher}</td>
         <td className="identifier">{this.props.data.identifier}</td>
