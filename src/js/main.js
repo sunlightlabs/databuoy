@@ -1,4 +1,4 @@
-//  Config.init(Data.downloadSpreadsheet);
+Config.init();
 
 React.render(
   <DataContainer />,
