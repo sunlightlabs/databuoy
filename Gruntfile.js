@@ -10,9 +10,12 @@ module.exports = function(grunt) {
         files: ['Gruntfile.js']
       },
 
-      concat: {
-        files: ['src/js/modules/*.js', 'src/js/components/datasets.js', 'src/js/*.js'],
-        tasks: ['build']
+      build: {
+        files: ['src/js/modules/*.js',
+                'src/js/components/datasets.js',
+                'src/js/*.js',
+                'src/scss/*.scss'],
+        tasks: ['sass', 'concat', 'build']
       }
     },
     babel: {
@@ -30,11 +33,22 @@ module.exports = function(grunt) {
              ]
         }
     },
-    concat: {
-      options: {
-        separator: ';\n',
-      },
+    sass: {
       dist: {
+        options: {
+          outputStyle: 'compressed',
+          sourceMap: true,
+        },
+        files: {
+          'tmp/css/custom.css': 'src/scss/app.scss'
+        }
+      }
+    },
+    concat: {
+      js: {
+        options: {
+          separator: ';\n',
+        },
         src: [
         'bower_components/tabletop/src/tabletop.js',
         'bower_components/react/react-with-addons.js',
@@ -44,6 +58,10 @@ module.exports = function(grunt) {
         'tmp/js/main.js'],
         dest: 'dist/js/built.js',
       },
+      css: {
+        src: ['bower_components/pure/pure-min.css', 'tmp/css/custom.css'],
+        dest: 'dist/css/app.min.css'
+      }
     },
   });
 
@@ -51,6 +69,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-babel');
-  grunt.registerTask('build', ['babel', 'concat']);
+  grunt.registerTask('build', ['babel', 'sass', 'concat']);
   grunt.registerTask('default', ['build','watch']);
 };
