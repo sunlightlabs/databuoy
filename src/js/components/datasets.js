@@ -91,7 +91,7 @@ var Dataset = React.createClass({
         <td className="references">{this.props.data.references}</td>
         <td className="theme">{this.props.data.theme}</td>
         <td className="contactPoint_fn">{this.props.data.contactPoint.fn}</td>
-        <td className="contactPoint_hasEmail">{this.props.data.contactPoint.hasEmail}</td>
+        <td className="contactPoint_hasEmail">{Utils.parseEmail(this.props.data.contactPoint.hasEmail)}</td>
       </tr>
     );
   }
