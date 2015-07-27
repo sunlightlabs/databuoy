@@ -10,6 +10,8 @@ var DataContainer = React.createClass({
     }).done(function(data) {
     	this.setState({data: data['dataset']});
       $('table').dataTable();
+      $('#loading').css({'display':'none'});
+      $('#content').css({'display':'block'});
     });
   },
   componentDidMount: function() {
