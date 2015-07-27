@@ -1,10 +1,19 @@
-table {
-  thead {
-    tr {
-      td {
-       text-align: center;
-       font-weight: bold;
-      }
-    }
+#wrapper {
+  width: 1080px;
+  margin: 0 auto 0 auto;
+}
+thead {
+  td {
+    font-weight: bold;
   }
+}
+td {
+  &.optional,&.conditional {
+    display: none;
+  }
+  word-wrap: break-word;
+  max-width: 135px;
+}
+.hidden {
+  display: none;
 }
