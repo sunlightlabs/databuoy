@@ -52,13 +52,16 @@ module.exports = function(grunt) {
         'bower_components/tabletop/src/tabletop.js',
         'bower_components/react/react-with-addons.js',
         'bower_components/jquery/dist/jquery.min.js',
+        'bower_components/datatables/media/js/jquery.dataTables.min.js',
         'tmp/js/components/*.js',
         'tmp/js/modules/*.js',
         'tmp/js/main.js'],
         dest: 'dist/js/built.js',
       },
       css: {
-        src: ['bower_components/pure/pure-min.css', 'tmp/css/custom.css'],
+        src: ['bower_components/pure/pure-min.css',
+              'bower_components/datatables/media/css/jquery.dataTables.min.css',
+              'tmp/css/custom.css'],
         dest: 'dist/css/app.min.css'
       }
     },
@@ -72,6 +75,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-contrib-clean');  
-  grunt.registerTask('build', ['babel', 'sass', 'concat', 'clean']);
-  grunt.registerTask('default', ['build','watch']);
+  grunt.registerTask('build', ['babel', 'sass', 'concat']);
+  grunt.registerTask('default', ['build', 'clean', 'watch']);
 };
