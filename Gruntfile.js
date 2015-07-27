@@ -9,7 +9,6 @@ module.exports = function(grunt) {
         },
         files: ['Gruntfile.js']
       },
-
       build: {
         files: ['src/js/modules/*.js',
                 'src/js/components/datasets.js',
@@ -63,12 +62,16 @@ module.exports = function(grunt) {
         dest: 'dist/css/app.min.css'
       }
     },
+    clean: {
+      build: ['tmp']
+    }
   });
 
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-babel');
-  grunt.registerTask('build', ['babel', 'sass', 'concat']);
+  grunt.loadNpmTasks('grunt-contrib-clean');  
+  grunt.registerTask('build', ['babel', 'sass', 'concat', 'clean']);
   grunt.registerTask('default', ['build','watch']);
 };
