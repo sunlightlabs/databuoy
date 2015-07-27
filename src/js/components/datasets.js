@@ -9,6 +9,7 @@ var DataContainer = React.createClass({
       url: "sample-data.json"
     }).done(function(data) {
     	this.setState({data: data['dataset']});
+      $('table').dataTable();
     });
   },
   componentDidMount: function() {
@@ -29,7 +30,7 @@ var DataList = React.createClass({
       );
     });
     return (
-      <table className="data_list">
+      <table className="display">
         <thead>
           <tr>
             <td className="title"><span className="label">title</span></td>
@@ -70,7 +71,7 @@ var Dataset = React.createClass({
     return (
       <tr>
         <td className="title">{this.props.data.title}</td>
-        <td className="description">{this.props.data.description}</td>
+        <td className="description">{Utils.parseDescription(this.props.data.description)}</td>
         <td className="keyword">{Utils.parseKeywords(this.props.data.keyword)}</td>
         <td className="modified">{this.props.data.modified}</td>
         <td className="publisher">{this.props.data.publisher}</td>
