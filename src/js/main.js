@@ -1,6 +1,4 @@
 Config.init();
-
 React.render(
-  <DataContainer />,
-  document.getElementById('content')
-);
+  <App />, document.getElementById('content')
+)
