@@ -1,14 +1,26 @@
+var App = React.createClass({
+  getInitialState: function() {
+    return ({route: Routes.parse_hash(window.location.hash)});
+  },
+  render: function() {
+    return (
+      <DataContainer route={this.state.route} />
+    );
+  }
+});
+
 var DataContainer = React.createClass({
   getInitialState: function() {
   	return ({data: []});
   },
   loadData: function() {
-  	// load sample data for now
+    // load sample data for now
   	$.ajax({
       context: this,
       url: "sample-data.json"
     }).done(function(data) {
-    	this.setState({data: data['dataset']});
+      data = Data.cleanDatasets(data['dataset'])
+    	this.setState({data: data});
       $('table').dataTable();
       $('#loading').css({'display':'none'});
       $('#content').css({'display':'block'});
@@ -18,9 +30,14 @@ var DataContainer = React.createClass({
   	this.loadData();
   },
   render: function() {
-    return (
-    	<DataList datasets={this.state.data} />
-    );
+    if (this.props.route === 'dataset') {
+      dataset_id = Routes.parse_dataset_id(window.location.search)
+      dataset = Data.getDataset(dataset_id, this.state.data)
+      r = <Dataset dataset={dataset} />
+    } else {
+      r = <DataList datasets={this.state.data} />
+    }
+    return r;
   }
 });
 
@@ -28,7 +45,7 @@ var DataList = React.createClass({
   render: function() {
     var datasets = this.props.datasets.map(function (dataset) {
       return (
-        <Dataset data={dataset} key={dataset.identifier} />
+        <DatasetRow data={dataset} key={dataset.identifier} />
       );
     });
     return (
@@ -68,7 +85,7 @@ var DataList = React.createClass({
   }
 });
 
-var Dataset = React.createClass({
+var DatasetRow = React.createClass({
   render: function() {
     return (
       <tr>
@@ -99,3 +116,90 @@ var Dataset = React.createClass({
     );
   }
 });
+
+var Dataset = React.createClass({
+  render: function() {
+    if (this.props.dataset) {
+      var distributions = this.props.dataset.distribution.map(function (distribution) {
+        return (
+          <Distribution className="distribution" attributes={distribution} />
+        );
+      });
+    } else {
+      distributions = []
+    }
+    return (
+      <div id="dataset">
+        <h2>{this.props.dataset.title}</h2>
+        <div>
+          <div>
+            <span className="label">Identifier:</span> {this.props.dataset.identifier}
+          </div>
+          <div>
+            <span className="label">Publisher:</span> {this.props.dataset.publisher}
+          </div>
+          <div>
+            <span className="label">Modified:</span> {this.props.dataset.modified}
+          </div>            
+        </div>
+        <div>
+          <span className="label">Description:</span> {this.props.dataset.description}
+        </div>
+        {distributions.length > 0 ?
+          <div>
+            {distributions}
+            <div className="clear" />
+          </div> : null}
+        <ContactPoint contactPoint={this.props.dataset.contactPoint} />
+        <div>
+          <h3>Access Level:</h3>
+          {this.props.dataset.accessLevel}
+        </div>
+      </div>
+    );
+  }
+});
+
+var Distribution = React.createClass({
+  render: function() {
+    var attributes = []
+    for (var key in this.props.attributes) {
+      if (this.props.attributes.hasOwnProperty(key)) {
+        attributes.push(
+          <div className="distribution_attribute">
+            <span className="label">
+              {key}: 
+            </span>
+            <span>
+              {this.props.attributes[key]}
+            </span>
+          </div>
+        )
+      }
+    }
+    return (
+      <div className="distribution">
+        <h5>Distribution</h5>
+        {attributes}
+        <div className="clear" />
+      </div>
+    )
+  }
+})
+
+var ContactPoint = React.createClass({
+  render: function() {
+    return (
+      <div className="contact_point">
+        <h3>Contact Point</h3>
+        {/* The && is a pretty gross way to not error out when contactPoint hasn't yet been defined */}
+        <div>
+          <span className="label">Name: </span>{this.props.contactPoint && this.props.contactPoint.fn}
+        </div>
+        <div>
+          <span className="label">Email: </span>{this.props.contactPoint && Utils.parseEmail(this.props.contactPoint.hasEmail)}
+        </div>
+      </div>
+    )
+  }
+})

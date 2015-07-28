@@ -1,0 +1,18 @@
+.dataset {
+  div {
+    clear: both;
+  }
+}
+span.label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+.distribution {
+  div {
+    float: left;
+    clear: none;
+  }
+  .distribution_attribute {
+    clear: both;
+  }
+}
