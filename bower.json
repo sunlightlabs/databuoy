@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "dependencies": {
     "datatables": "1.10.7",
-  	"pure": "0.6.0",
+  	"es5-shim": "4.1.10",
+    "pure": "0.6.0",
     "react": "0.13.3",
     "tabletop": "1.4.2",
     "jquery": "2.1.4"
