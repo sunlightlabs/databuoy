@@ -1,9 +1,17 @@
+div {
+  padding: 10px 0 10px 0;
+}
+h1, h2 {
+  word-wrap: break-word;
+}
+#app {
+  width: 100%;
+}
 #wrapper {
-  width: 1080px;
-  margin: 0 auto 0 auto;
+  padding: 0 10px 0 10px;
 }
 #content {
-  display: none;
+  //display: none;
 }
 thead {
   td {
@@ -15,8 +23,12 @@ td {
     display: none;
   }
   word-wrap: break-word;
-  max-width: 135px;
 }
 .hidden {
   display: none;
+}
+.clear {
+  clear: both !important;
+  margin: 0;
+  padding: 0;
 }
