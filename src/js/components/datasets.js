@@ -1,6 +1,6 @@
 var App = React.createClass({
   getInitialState: function() {
-    return ({route: Routes.parse_hash(window.location.hash)});
+    return ({route: Routes.parse_search(window.location.search)});
   },
   render: function() {
     return (
@@ -30,12 +30,12 @@ var DataContainer = React.createClass({
   	this.loadData();
   },
   render: function() {
-    if (this.props.route === 'dataset') {
+    if (this.props.route === 'index') {
+      r = <DataList datasets={this.state.data} />
+    } else {
       dataset_id = Routes.parse_dataset_id(window.location.search)
       dataset = Data.getDataset(dataset_id, this.state.data)
       r = <Dataset dataset={dataset} />
-    } else {
-      r = <DataList datasets={this.state.data} />
     }
     return r;
   }
@@ -89,7 +89,7 @@ var DatasetRow = React.createClass({
   render: function() {
     return (
       <tr>
-        <td className="title">{this.props.data.title}</td>
+        <td className="title"><a href={Data.makeDatasetLink(this.props.data)}>{this.props.data.title}</a></td>
         <td className="description hidden">{Utils.parseDescription(this.props.data.description)}</td>
         <td className="keyword">{Utils.parseKeywords(this.props.data.keyword)}</td>
         <td className="modified">{this.props.data.modified}</td>
@@ -119,7 +119,7 @@ var DatasetRow = React.createClass({
 
 var Dataset = React.createClass({
   render: function() {
-    if (this.props.dataset) {
+    if (this.props.dataset && this.props.dataset.distribution) {
       var distributions = this.props.dataset.distribution.map(function (distribution) {
         return (
           <Distribution className="distribution" attributes={distribution} />
@@ -147,6 +147,7 @@ var Dataset = React.createClass({
         </div>
         {distributions.length > 0 ?
           <div>
+            <h3>Distributions</h3>
             {distributions}
             <div className="clear" />
           </div> : null}

@@ -33,6 +33,9 @@ var Data = {
   getDatasets: function(objects) {
   	return this.datasets;
   },
+  makeDatasetLink: function(object) {
+    return "/?id=" + object.publisher.name + "-" + object.identifier;
+  },
   getDataset: function(buoy_id, dataset_array) {
     for (i = 0; i < dataset_array.length; i++) { 
       if (dataset_array[i]['buoy_id'] === buoy_id) {

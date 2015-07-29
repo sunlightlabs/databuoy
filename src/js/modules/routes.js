@@ -1,6 +1,6 @@
 var Routes = {
-  parse_hash: function(url_hash) {
-    if (url_hash === "#dataset") {
+  parse_search: function() {
+    if (window.location.search.match(/\?id=(.*)/) !== null) {
       return 'dataset';
     } else {
       return 'index';
@@ -8,5 +8,5 @@ var Routes = {
   },
   parse_dataset_id: function(search) {
     return window.location.search.match(/\?id=(.*)/)[1];
-  },
+  }
 };
