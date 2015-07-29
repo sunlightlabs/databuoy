@@ -50,6 +50,7 @@ module.exports = function(grunt) {
         },
         src: [
         'bower_components/es5-shim/es5-shim.min.js',
+        'bower_components/papaparse/papaparse.min.js',
         'bower_components/tabletop/src/tabletop.js',
         'bower_components/react/react-with-addons.js',
         'bower_components/jquery/dist/jquery.min.js',
