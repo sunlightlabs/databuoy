@@ -11,38 +11,38 @@ var Data = {
       });
     }
     if (sheet_config.isGoogleSheet()) {
-    	return Tabletop.init({
-    			 key: sheet_config.getSheetURL(),
+      return Tabletop.init({
+           key: sheet_config.getSheetURL(),
                  callback: (function(data, tabletop) { Data.setDatasets(data); }),
                  simpleSheet: true });
     } else {
-    	console.log('This has not been implemented yet');
+      console.log('This has not been implemented yet');
     }
   },
   setDatasets: function(objects) {
-  	this.datasets = this.cleanDatasets(objects);
-  	return this.datasets;
+    this.datasets = this.cleanDatasets(objects);
+    return this.datasets;
   },
   cleanDatasets: function(objects) {
-  	clean_datasets = [];
-  	for (i = 0; i < objects.length; i++) { 
-  	  if (objects[i].issued !== "Date of formal issuance.") { //We have an explainer row that we need to ignore
-  		  object = objects[i];
+    clean_datasets = [];
+    for (i = 0; i < objects.length; i++) { 
+      if (objects[i].issued !== "Date of formal issuance.") { //We have an explainer row that we need to ignore
+        object = objects[i];
         object.buoy_id = object.publisher.name + "-" + object.identifier;
         clean_datasets.push(object);
-  	  }
-  	}
-  	return clean_datasets;
+      }
+    }
+    return clean_datasets;
   },
   getDatasets: function(objects) {
-  	return this.datasets;
+    return this.datasets;
   },
   makeDatasetLink: function(object) {
     return "/?id=" + object.publisher.name + "-" + object.identifier;
   },
   getDataset: function(buoy_id, dataset_array) {
     for (i = 0; i < dataset_array.length; i++) { 
-      if (dataset_array[i].buoy_id === buoy_id) {
+      if (dataset_array[i].buoy_id === decodeURIComponent(buoy_id)) {
         return dataset_array[i];
       }
     }
@@ -55,19 +55,17 @@ var Data = {
       cache_row = {};
       for (i = 0; i < parsed_csv.data.length; i++) { 
         if (parsed_csv.data[i].title === "") { // in this case, we will assume the row is a distribution of the last title-having row
-          distribution = this.convertDistribution(key, parsed_csv.data[i], cache_row);
-          cache_row.distribution = this.packDistributions(distribution, row_obj);
+          distribution = this.convertKeyGroupToJson('distribution', parsed_csv.data[i], cache_row);
+          cache_row.distribution.push(distribution);
           dataset[dataset.length - 1] = cache_row;
         } else {
           row_obj = {}; // Build a new row from scratch
           row_distribution_processed = false;
           for (var key in parsed_csv.data[i]) {
             if (parsed_csv.data[i].hasOwnProperty(key)) {
-              if (this.isDistributionColumn(key) && !row_distribution_processed) {
-                distribution = this.convertDistribution(key, parsed_csv.data[i], cache_row);
-                row_obj.distribution = this.packDistributions(distribution, row_obj);
-                row_distribution_processed = true;
-              } else {
+              if (this.keyGroup(key) && this.keyGroupHasNotBeenProcessed(key, row_obj)) {
+                row_obj[this.keyGroup(key)] = this.convertKeyGroupToJson(this.keyGroup(key), parsed_csv.data[i], cache_row);
+              } else { 
                 new_value = this.convertCSVAttrToJSON(key, parsed_csv.data[i], cache_row);
                 row_obj[key] = new_value;
               }
@@ -77,7 +75,7 @@ var Data = {
           cache_row = row_obj;
         }
       }
-      console.log(dataset);
+      return dataset;
     } else {
       console.error('error parsing csv...');
     }
@@ -97,11 +95,6 @@ var Data = {
     } else {
       return current_row_obj[key];
     }
-  },
-  convertCSVKeyname: function(key) {
-    key_override = this.csv_keyname_overrides[key];
-    r = key_override === undefined ? key : key_override;
-    return r;
   },
   convertPublisher: function(key, current_row_obj, cache_row) {
     return {
@@ -129,15 +122,33 @@ var Data = {
   convertCSVStringToArray: function(key, current_row_obj, cache_row) {
     return Utils.parseStringToArray(current_row_obj[key]);
   },
+  convertKeyGroupToJson: function(key_group, current_row_obj, cache_row) {
+    key_group_obj = {};
+    for (var k in current_row_obj) {
+      is_in_key_group = this.keyGroup(k) === key_group;
+      if (is_in_key_group) {
+        new_key = k.split(":")[1];
+        key_group_obj[new_key] = current_row_obj[k];
+      }
+    }
+    if (key_group === 'distribution' && current_row_obj.title !== "") {
+      return [key_group_obj];
+    } else {
+      return key_group_obj;
+    }
+  },
   isDistributionColumn: function(key) {
     return key.match('distribution') !== null;
   },
-  packDistributions: function(distribution, current_row_obj) {
-    if (current_row_obj.distribution === undefined) {
-      return [distribution];
+  keyGroupHasNotBeenProcessed: function(key, current_row_obj) {
+    return current_row_obj[key] === undefined;
+  },
+  keyGroup: function(key) {
+    key = key.split(":");
+    if (key.length > 1) {
+      return key[0];
     } else {
-      current_row_obj.distribution.push(distribution);
-      return current_row_obj.distribution;
+      return false;
     }
-  }
+  },
 };
