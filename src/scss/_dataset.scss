@@ -8,9 +8,11 @@ span.label {
   margin-right: 5px;
 }
 .distribution {
+  display: block;
+  width: 23%;
+  float: left;
+  clear: none;
   div {
-    float: left;
-    clear: none;
   }
   .distribution_attribute {
     clear: both;
