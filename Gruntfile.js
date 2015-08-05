@@ -60,6 +60,7 @@ module.exports = function(grunt) {
         'tmp/js/modules/utils.js',
         'tmp/js/modules/data.js',
         'tmp/js/modules/routes.js',
+        'tmp/js/interactions.js',
         'tmp/js/main.js'],
         dest: 'dist/js/built.js',
       },

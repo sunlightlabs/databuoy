@@ -23228,6 +23228,13 @@ var Routes = {
 ;
 'use strict';
 
+$('#header').click(function () {
+  window.location = window.location.pathname;
+});
+//# sourceMappingURL=interactions.js.map
+;
+'use strict';
+
 Config.init(function () {
   React.render(React.createElement(App, null), document.getElementById('content'));
 });
