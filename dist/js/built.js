@@ -23090,7 +23090,7 @@ var Data = {
     return this.datasets;
   },
   makeDatasetLink: function makeDatasetLink(object) {
-    return "/?id=" + object.publisher.name + "-" + object.identifier;
+    return window.location.href + "?id=" + object.publisher.name + "-" + object.identifier;
   },
   getDataset: function getDataset(buoy_id, dataset_array) {
     for (i = 0; i < dataset_array.length; i++) {
