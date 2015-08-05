@@ -11,20 +11,16 @@ var App = React.createClass({
 
 var DataContainer = React.createClass({
   getInitialState: function() {
-  	return ({data: []});
+    return ({data: Data.datasets});
   },
   loadData: function() {
-    // load sample data for now
-  	$.ajax({
-      context: this,
-      url: "sample-data.json"
-    }).done(function(data) {
-      data = Data.cleanDatasets(data['dataset'])
-    	this.setState({data: data});
+    context = this;
+    Data.downloadSpreadsheet().then(function(data) {
+      context.setState({data: data});
       $('table').dataTable();
       $('#loading').css({'display':'none'});
       $('#content').css({'display':'block'});
-    });
+    })
   },
   componentDidMount: function() {
   	this.loadData();
