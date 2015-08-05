@@ -4,20 +4,32 @@ var Data = {
     "contactPoint:fn": 'contactPoint',
     "contactPoint:hasEmail": 'contactPoint',
   },
-  downloadSpreadsheet: function(sheet_config) {
-    if (sheet_config.getTestMode() === true) {
-      return $.ajax({
-         url: "sample-data.json"
-      });
-    }
-    if (sheet_config.isGoogleSheet()) {
-      return Tabletop.init({
-           key: sheet_config.getSheetURL(),
-                 callback: (function(data, tabletop) { Data.setDatasets(data); }),
-                 simpleSheet: true });
-    } else {
-      console.log('This has not been implemented yet');
-    }
+  datasets: [],
+  downloadSpreadsheet: function() {
+    var promise = new Promise(function(resolve, reject) {
+      spreadsheet_data = null;
+      if (Config.isGoogleSheet()) {
+        tabletop = Tabletop.init({
+                    key: Config.getSheetURL(),
+                         callback: (function(data, tabletop) {
+                            data_csv = Data.transformGoogleSheet(data);
+                            data_json = Data.convertCSVtoJSON(data_csv);
+                            clean_data = Data.cleanDatasets(data_json);
+                            resolve(clean_data);
+                          }),
+                         simpleSheet: true });
+      } else {
+        $.ajax({
+          context: this,
+          url: "sample-data.csv"
+        }).done(function(data) {
+          data_json = Data.convertCSVtoJSON(data);
+          clean_data = Data.cleanDatasets(data_json);
+          resolve(clean_data);
+        });
+      }
+    });
+    return promise;
   },
   setDatasets: function(objects) {
     this.datasets = this.cleanDatasets(objects);
@@ -77,7 +89,7 @@ var Data = {
       }
       return dataset;
     } else {
-      console.error('error parsing csv...');
+      console.error(parsed_csv.errors);
     }
   },
   convertCSVAttrToJSON: function(key, current_row_obj, cache_row) {
@@ -151,4 +163,7 @@ var Data = {
       return false;
     }
   },
+  transformGoogleSheet: function(data) {
+    return Papa.unparse(data)
+  }
 };
