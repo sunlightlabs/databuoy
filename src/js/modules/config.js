@@ -4,15 +4,16 @@ var Config = {
   portal_name: 'Data Portal',
   init: function(callback) {
     self = this;
-    // Set sheet URL
-    this.googleSheetURL().done(function( data ) {
+    // Set Google sheet URL if there is one
+    // otherwise use the default data.csv
+    this.googleSheetURL().done(function(data) {
       if (data !== "") {
         self.setSheetURL(data);
       }
-      //callback(Config);
+      callback();
     });
     // Set portal title
-    this.portalName().done(function( data ) {
+    this.portalName().done(function(data) {
       self.setPortalName(data);
       Utils.setPageTitle(self.getPortalName());
     });
