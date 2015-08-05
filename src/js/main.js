@@ -1,4 +1,5 @@
-Config.init();
-React.render(
-  <App />, document.getElementById('content')
-)
+Config.init(function() {
+  React.render(
+    <App />, document.getElementById('content')
+  )
+});
