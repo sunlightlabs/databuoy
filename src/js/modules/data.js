@@ -31,10 +31,6 @@ var Data = {
     });
     return promise;
   },
-  setDatasets: function(objects) {
-    this.datasets = this.cleanDatasets(objects);
-    return this.datasets;
-  },
   cleanDatasets: function(objects) {
     clean_datasets = [];
     for (i = 0; i < objects.length; i++) { 
@@ -45,9 +41,6 @@ var Data = {
       }
     }
     return clean_datasets;
-  },
-  getDatasets: function(objects) {
-    return this.datasets;
   },
   makeDatasetLink: function(object) {
     return window.location.href + "?id=" + object.publisher.name + "-" + object.identifier;
@@ -164,6 +157,49 @@ var Data = {
     }
   },
   transformGoogleSheet: function(data) {
-    return Papa.unparse(data)
+    return Papa.unparse(data);
+  },
+  exportDatasetAsJSON: function(data) {
+    catalog = {
+                dataset: this.prepareDatasetsForExport(data),
+                conformsTo: "https://project-open-data.cio.gov/v1.1/schema",
+                "@type": "dcat:Catalog",
+                "@context": "https://project-open-data.cio.gov/v1.1/schema/catalog.jsonld"
+              };
+    return JSON.stringify(catalog);
+  },
+  prepareDatasetsForExport: function(datasets) {
+    exportable_datasets = [];
+    for (i = 0; i < datasets.length; i++) {
+      exportable_dataset = this.deleteEmptyProperties(datasets[i]);
+      exportable_dataset = this.adjustDataFieldsForExport(exportable_dataset);
+      exportable_datasets.push(exportable_dataset);
+    }
+    return exportable_datasets;
+  },
+  adjustDataFieldsForExport: function(dataset) {
+    email = dataset.contactPoint.hasEmail;
+    dataset.contactPoint.hasEmail = 'mailto:' + email;
+    return dataset;
+  },
+  deleteEmptyProperties: function(dataset) {
+    for (var key in dataset) {
+      if (dataset[key] instanceof Array) {
+        if (dataset[key].length === 1 && dataset[key][0] === "") {
+          delete dataset[key];
+        } else {
+          this.deleteEmptyProperties(dataset[key]);
+        }
+      }
+      else if (dataset[key] instanceof Object) {
+        dataset[key] = this.deleteEmptyProperties(dataset[key]);
+      }
+      else if (dataset.hasOwnProperty(key)); {
+        if (dataset[key] === "" || dataset[key] === [] ) {
+          delete dataset[key];
+        }
+      }
+    }
+    return dataset;
   }
 };
