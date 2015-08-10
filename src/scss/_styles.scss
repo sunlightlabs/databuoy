@@ -4,6 +4,17 @@
 div {
   padding: 10px 0 10px 0;
 }
+a {
+  text-decoration: none;
+  color: $link-color;
+}
+header {
+  a {
+    &:visited {
+      color: $font-color;
+    }
+  }
+}
 #app {
   width: 100%;
 }
