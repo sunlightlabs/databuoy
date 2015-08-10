@@ -15,6 +15,6 @@ var Utils = {
   },
   setPageTitle: function(page_title) {
     $('title').text(page_title);
-    $('h1 a').text(page_title);
+    $('#header').text(page_title);
   }
 };
