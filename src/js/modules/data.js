@@ -180,6 +180,7 @@ var Data = {
   adjustDataFieldsForExport: function(dataset) {
     email = dataset.contactPoint.hasEmail;
     dataset.contactPoint.hasEmail = 'mailto:' + email;
+    delete dataset.buoy_id;
     return dataset;
   },
   deleteEmptyProperties: function(dataset) {
