@@ -10,6 +10,8 @@ Databuoy is a spreadsheet-backed data catalog that anyone can put online for fre
 
 With Databuoy, [this spreadsheet](https://docs.google.com/spreadsheets/d/16bk6mScsXWpd-KX80Jn2Qzj1q_vyeFfCQBeWMdBi2nE/edit#gid=0) turns into [this website](http://sunlightlabs.github.io/databuoy/).
 
+If you're a developer, you can read about deployment [here](https://github.com/sunlightlabs/databuoy/wiki/Setup-(for-developers)). If not, read on!
+
 ### What does it mean that Databuoy is spreadsheet-backed?
 
 Databuoy draws its data from a publicly viewable spreadsheet. Whenever that spreadsheet is updated, the website will be updated as well. That spreadsheet can either be in the form of a [Google Sheet](https://www.google.com/sheets/about/) (which updates automatically) or a `.csv` file (which must be manually updated on GitHub). 
