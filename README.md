@@ -7,19 +7,26 @@
 _Image courtesy of Isaac Wedin under the Creative Commons [Attribution 2.0 Generic](https://creativecommons.org/licenses/by/2.0/) license_
 
 
-Databuoy is a free, spreadsheet-backed data catalog that's easy for anyone to put online. It helps organizations compile machine-readable data inventories while simultaneously creating a lightweight data catalog.
+Databuoy is a spreadsheet-backed data catalog that anyone can put online for free. It helps organizations compile a machine-readable data inventory while simultaneously creating a public website that presents it. 
 
-It:
+With Databuoy, [this spreadsheet](https://docs.google.com/spreadsheets/d/16bk6mScsXWpd-KX80Jn2Qzj1q_vyeFfCQBeWMdBi2nE/edit#gid=0) turns into [this website](http://sunlightlabs.github.io/databuoy/).
 
-* uses [Google Sheets](https://www.google.com/sheets/about/) (free!) to store information about a government's data inventory (it can also read in data from a CSV)
-* uses [GitHub Pages](https://pages.github.com/) (free!) to serve that spreadsheet's contents in a searchable website that anyone can use (it can also be deployed to a private server).
-* is designed to work off of the United States Federal Government's [Project Open Data Metadata Schema v1.1](https://project-open-data.cio.gov/v1.1/schema/)
+### What does it mean that Databuoy is spreadsheet-backed?
 
-It doesn't:
+Databuoy draws its data from a publicly viewable spreadsheet. Whenever that spreadsheet is updated, the website will be updated as well. That spreadsheet can either be in the form of a [Google Sheet](https://www.google.com/sheets/about/) (which updates automatically) or a `.csv` file (which must be manually updated on GitHub). 
 
-* host your datasets
-* replace fuller-fledged data portals like [CKAN](http://ckan.org/) (not even close!)
+### How does the website get online?
 
-## Exports
+Databuoy uses [GitHub Pages](https://pages.github.com/) to _automatically_ provide a free, publicly-accessible website. By copying Databuoy's open-source code on GitHub ("[forking](https://help.github.com/articles/fork-a-repo/)" it) and pasting your spreadsheet's URL into the `google_sheet_url` file, you'll have a website at `https://your_github_username.github.io/databuoy`. You can even [set up](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/) a custom domain name!
 
-Databuoy can export to the [Project Open Data Metadata Schema (v1.1)](https://project-open-data.cio.gov/v1.1/schema/), but the [official converters](http://labs.data.gov/dashboard/datagov/csv_to_json) should be regarded as canonical.
+### Does my spreadsheet need a particular format?
+
+Yes! You should just make a copy [this example spreadsheet](https://docs.google.com/spreadsheets/d/16bk6mScsXWpd-KX80Jn2Qzj1q_vyeFfCQBeWMdBi2nE/edit#gid=0) whose columns are based on the US Federal Government's [Project Open Data Metadata Schema v1.1](https://project-open-data.cio.gov/v1.1/schema).
+
+### How do I start?
+
+Check out our [setup guide](https://github.com/sunlightlabs/databuoy/wiki/Setting-up-a-catalog-with-Databuoy-and-Google-Sheets).
+
+### Exports
+
+Databuoy can export to the [Project Open Data Metadata Schema (v1.1)](https://project-open-data.cio.gov/v1.1/schema/), but the [official converters](http://labs.data.gov/dashboard/datagov/csv_to_json) are a better route.
