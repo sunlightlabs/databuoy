@@ -7,7 +7,7 @@
 _Image courtesy of Isaac Wedin under the Creative Commons [Attribution 2.0 Generic](https://creativecommons.org/licenses/by/2.0/) license_
 
 
-Databuoy is a free, spreadsheet-backed data catalog that's easy for anyone to put online. It helps governments compile machine-readable data inventories while simultaneously creating a lightweight data catalog.
+Databuoy is a free, spreadsheet-backed data catalog that's easy for anyone to put online. It helps organizations compile machine-readable data inventories while simultaneously creating a lightweight data catalog.
 
 It:
 
