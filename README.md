@@ -6,8 +6,7 @@
 
 _Image courtesy of Isaac Wedin under the Creative Commons [Attribution 2.0 Generic](https://creativecommons.org/licenses/by/2.0/) license_
 
-
-Databuoy is a spreadsheet-backed data catalog that anyone can put online for free. It helps organizations compile a machine-readable data inventory while simultaneously creating a public website that presents it. 
+Databuoy is a spreadsheet-backed data catalog that anyone can put online for free. It helps organizations compile a machine-readable data inventory while simultaneously creating a public website that presents it.  
 
 With Databuoy, [this spreadsheet](https://docs.google.com/spreadsheets/d/16bk6mScsXWpd-KX80Jn2Qzj1q_vyeFfCQBeWMdBi2nE/edit#gid=0) turns into [this website](http://sunlightlabs.github.io/databuoy/).
 
@@ -23,9 +22,13 @@ Databuoy uses [GitHub Pages](https://pages.github.com/) to _automatically_ provi
 
 Yes! You should just make a copy [this example spreadsheet](https://docs.google.com/spreadsheets/d/16bk6mScsXWpd-KX80Jn2Qzj1q_vyeFfCQBeWMdBi2nE/edit#gid=0) whose columns are based on the US Federal Government's [Project Open Data Metadata Schema v1.1](https://project-open-data.cio.gov/v1.1/schema).
 
+### Do datasets need to be online for them to be in Databuoy?
+
+No! The schema allows for datasets that are not public — that way people can know about a dataset, even if they don't have access to its contents (that way, we can know that the police has a `list_of_criminals_unfit_for_public_circulation.xls` file, even if we can't see who's in it).
+
 ### How do I start?
 
-Check out our [setup guide](https://github.com/sunlightlabs/databuoy/wiki/Setting-up-a-catalog-with-Databuoy-and-Google-Sheets).
+Check out our setup guides for [developers](https://github.com/sunlightlabs/databuoy/wiki/Setup-(for-developers)) and [non-developers](https://github.com/sunlightlabs/databuoy/wiki/Setting-up-a-catalog-with-Databuoy-and-Google-Sheets).
 
 ### Exports
 
