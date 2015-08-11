@@ -24,7 +24,7 @@ Yes! You should just make a copy [this example spreadsheet](https://docs.google.
 
 ### Do datasets need to be online for them to be in Databuoy?
 
-No! The schema allows for datasets that are not public — that way people can know about a dataset, even if they don't have access to its contents (that way, we can know that the police has a `list_of_criminals_unfit_for_public_circulation.xls` file, even if we can't see who's in it).
+No! The schema allows for datasets that are not public, so people can know about a dataset, even if they don't have access to its contents (that way, we can know that the police has a `list_of_criminals_unfit_for_public_circulation.xls` file, even if we can't see who's in it).
 
 ### How do I start?
 
