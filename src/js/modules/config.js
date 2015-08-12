@@ -5,7 +5,7 @@ var Config = {
   init: function(callback) {
     self = this;
     // Set Google sheet URL if there is one
-    // otherwise use the default data.csv
+    // otherwise it will default to data.csv, which is set above
     this.googleSheetURL().done(function(data) {
       if (data !== "") {
         self.setSheetURL(data);

@@ -22965,7 +22965,7 @@ var Config = {
   init: function init(callback) {
     self = this;
     // Set Google sheet URL if there is one
-    // otherwise use the default data.csv
+    // otherwise it will default to data.csv, which is set above
     this.googleSheetURL().done(function (data) {
       if (data !== "") {
         self.setSheetURL(data);
@@ -23030,7 +23030,7 @@ var Utils = {
   },
   setPageTitle: function setPageTitle(page_title) {
     $('title').text(page_title);
-    $('h1 a').text(page_title);
+    $('#header').text(page_title);
   }
 };
 //# sourceMappingURL=utils.js.map
@@ -23060,7 +23060,7 @@ var Data = {
       } else {
         $.ajax({
           context: this,
-          url: "sample-data.csv"
+          url: "data.csv"
         }).done(function (data) {
           data_json = Data.convertCSVtoJSON(data);
           clean_data = Data.cleanDatasets(data_json);
@@ -23069,10 +23069,6 @@ var Data = {
       }
     });
     return promise;
-  },
-  setDatasets: function setDatasets(objects) {
-    this.datasets = this.cleanDatasets(objects);
-    return this.datasets;
   },
   cleanDatasets: function cleanDatasets(objects) {
     clean_datasets = [];
@@ -23085,9 +23081,6 @@ var Data = {
       }
     }
     return clean_datasets;
-  },
-  getDatasets: function getDatasets(objects) {
-    return this.datasets;
   },
   makeDatasetLink: function makeDatasetLink(object) {
     return window.location.href + "?id=" + object.publisher.name + "-" + object.identifier;
@@ -23206,6 +23199,48 @@ var Data = {
   },
   transformGoogleSheet: function transformGoogleSheet(data) {
     return Papa.unparse(data);
+  },
+  exportDatasetAsJSON: function exportDatasetAsJSON(data) {
+    catalog = {
+      dataset: this.prepareDatasetsForExport(data),
+      conformsTo: "https://project-open-data.cio.gov/v1.1/schema",
+      "@type": "dcat:Catalog",
+      "@context": "https://project-open-data.cio.gov/v1.1/schema/catalog.jsonld"
+    };
+    return JSON.stringify(catalog);
+  },
+  prepareDatasetsForExport: function prepareDatasetsForExport(datasets) {
+    exportable_datasets = [];
+    for (i = 0; i < datasets.length; i++) {
+      exportable_dataset = this.deleteEmptyProperties(datasets[i]);
+      exportable_dataset = this.adjustDataFieldsForExport(exportable_dataset);
+      exportable_datasets.push(exportable_dataset);
+    }
+    return exportable_datasets;
+  },
+  adjustDataFieldsForExport: function adjustDataFieldsForExport(dataset) {
+    email = dataset.contactPoint.hasEmail;
+    dataset.contactPoint.hasEmail = 'mailto:' + email;
+    delete dataset.buoy_id;
+    return dataset;
+  },
+  deleteEmptyProperties: function deleteEmptyProperties(dataset) {
+    for (var key in dataset) {
+      if (dataset[key] instanceof Array) {
+        if (dataset[key].length === 1 && dataset[key][0] === "") {
+          delete dataset[key];
+        } else {
+          this.deleteEmptyProperties(dataset[key]);
+        }
+      } else if (dataset[key] instanceof Object) {
+        dataset[key] = this.deleteEmptyProperties(dataset[key]);
+      } else if (dataset.hasOwnProperty(key)) ;{
+        if (dataset[key] === "" || dataset[key] === []) {
+          delete dataset[key];
+        }
+      }
+    }
+    return dataset;
   }
 };
 //# sourceMappingURL=data.js.map
@@ -23230,6 +23265,13 @@ var Routes = {
 
 $('#header').click(function () {
   window.location = window.location.pathname;
+});
+$('#export').click(function () {
+  Data.downloadSpreadsheet().then(function (data) {
+    new_elem = $('<code>' + Data.exportDatasetAsJSON(data) + '</code>');
+    $('body').html('');
+    $('body').append(new_elem);
+  });
 });
 //# sourceMappingURL=interactions.js.map
 ;

@@ -21,7 +21,7 @@ var Data = {
       } else {
         $.ajax({
           context: this,
-          url: "sample-data.csv"
+          url: "data.csv"
         }).done(function(data) {
           data_json = Data.convertCSVtoJSON(data);
           clean_data = Data.cleanDatasets(data_json);

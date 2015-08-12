@@ -1,0 +1,7 @@
+complex fields
+---
+contactPoint (vCard object)
+distribution (distribution objects array)
+language (array)
+references (array of strings)
+theme (array of strings)
