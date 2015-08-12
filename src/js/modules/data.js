@@ -10,7 +10,7 @@ var Data = {
       spreadsheet_data = null;
       if (Config.isGoogleSheet()) {
         tabletop = Tabletop.init({
-                    key: Config.getSheetURL(),
+                    key: Config.getDataLocation(),
                          callback: (function(data, tabletop) {
                             data_csv = Data.transformGoogleSheet(data);
                             data_json = Data.convertCSVtoJSON(data_csv);
@@ -21,7 +21,7 @@ var Data = {
       } else {
         $.ajax({
           context: this,
-          url: "data.csv"
+          url: Config.getDataLocation()
         }).done(function(data) {
           data_json = Data.convertCSVtoJSON(data);
           clean_data = Data.cleanDatasets(data_json);
