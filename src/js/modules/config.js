@@ -1,14 +1,14 @@
 var Config = {
-  test_mode: true,
-  sheet_url: 'data.csv',
+  data_location: 'data.csv',
   portal_name: 'Data Portal',
   init: function(callback) {
     self = this;
-    // Set Google sheet URL if there is one
-    // otherwise it will default to data.csv, which is set above
-    this.googleSheetURL().done(function(data) {
+    // Figure out where to get data from based on data_location
+    this.initializeDataLocation().done(function(data) {
       if (data !== "") {
-        self.setSheetURL(data);
+        self.setDataLocation(data);
+      } else {
+        alert("Couldn't find a data location. Check your data_location file.");
       }
       callback();
     });
@@ -18,10 +18,17 @@ var Config = {
       Utils.setPageTitle(self.getPortalName());
     });
   },
-  googleSheetURL: function() {
+  initializeDataLocation: function() {
     return $.ajax({
-             url: "google_sheet_url"
+             url: "data_location"
            });
+  },
+  setDataLocation: function(url) {
+    this.data_location = url;
+    return this.data_location;
+  },
+  getDataLocation: function() {
+    return this.data_location;
   },
   portalName: function() {
     return $.ajax({
@@ -29,17 +36,7 @@ var Config = {
            });
   },
   isGoogleSheet: function() {
-    return this.getSheetURL().match('.csv') === null;
-  },
-  setSheetURL: function(url) {
-    this.sheet_url = url;
-    return this.sheet_url;
-  },
-  getSheetURL: function() {
-    return this.sheet_url;
-  },
-  getTestMode: function() {
-    return this.test_mode;
+    return this.getDataLocation().match('google.com') !== null;
   },
   getPortalName: function() {
     return this.portal_name;
