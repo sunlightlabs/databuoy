@@ -5,7 +5,7 @@ var Utils = {
     });
   },
   parseKeywords: function(keyword_array) {
-    return keyword_array.join(", ");
+    return keyword_array === undefined ? '' : keyword_array.join(", ");
   },
   parseEmail: function(email_string) {
     return email_string.replace("mailto:", "");

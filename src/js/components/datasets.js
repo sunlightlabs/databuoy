@@ -41,7 +41,7 @@ var DataList = React.createClass({
   render: function() {
     var datasets = this.props.datasets.map(function (dataset) {
       return (
-        <DatasetRow data={dataset} key={dataset.identifier} />
+        <DatasetRow data={dataset} key={dataset.buoy_id} />
       );
     });
     return (
@@ -136,6 +136,9 @@ var Dataset = React.createClass({
           </div>
           <div>
             <span className="label">Modified:</span> {this.props.dataset.modified}
+          </div> 
+          <div>
+            <span className="label">Keyword:</span> {Utils.parseKeywords(this.props.dataset.keyword)}
           </div>            
         </div>
         <div>
@@ -151,6 +154,9 @@ var Dataset = React.createClass({
         <div>
           <h3>Access Level:</h3>
           {this.props.dataset.accessLevel}
+        </div>
+        <div>
+          <span className="label">Identifier:</span> {this.props.dataset.identifier}
         </div>
       </div>
     );

@@ -22436,7 +22436,7 @@ var DataList = React.createClass({
 
   render: function render() {
     var datasets = this.props.datasets.map(function (dataset) {
-      return React.createElement(DatasetRow, { data: dataset, key: dataset.identifier });
+      return React.createElement(DatasetRow, { data: dataset, key: dataset.buoy_id });
     });
     return React.createElement(
       'table',
@@ -22841,6 +22841,17 @@ var Dataset = React.createClass({
           ),
           ' ',
           this.props.dataset.modified
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Keyword:'
+          ),
+          ' ',
+          Utils.parseKeywords(this.props.dataset.keyword)
         )
       ),
       React.createElement(
@@ -22875,6 +22886,17 @@ var Dataset = React.createClass({
           'Access Level:'
         ),
         this.props.dataset.accessLevel
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'span',
+          { className: "label" },
+          'Identifier:'
+        ),
+        ' ',
+        this.props.dataset.identifier
       )
     );
   }
@@ -23017,7 +23039,7 @@ var Utils = {
     });
   },
   parseKeywords: function parseKeywords(keyword_array) {
-    return keyword_array.join(", ");
+    return keyword_array === undefined ? '' : keyword_array.join(", ");
   },
   parseEmail: function parseEmail(email_string) {
     return email_string.replace("mailto:", "");
