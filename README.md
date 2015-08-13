@@ -16,7 +16,7 @@ Databuoy draws its data from a publicly viewable spreadsheet. Whenever that spre
 
 ### How does the website get online?
 
-Databuoy uses [GitHub Pages](https://pages.github.com/) to _automatically_ provide a free, publicly-accessible website. By copying Databuoy's open-source code on GitHub ("[forking](https://help.github.com/articles/fork-a-repo/)" it) and pasting your spreadsheet's URL into the `google_sheet_url` file, you'll have a website at `https://your_github_username.github.io/databuoy`. You can even [set up](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/) a custom domain name!
+Databuoy uses [GitHub Pages](https://pages.github.com/) to _automatically_ provide a free, publicly-accessible website. By copying Databuoy's open-source code on GitHub ("[forking](https://help.github.com/articles/fork-a-repo/)" it) and pasting your spreadsheet's URL into the `data_location` file, you'll have a website at `https://your_github_username.github.io/databuoy`. You can even [set up](https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/) a custom domain name!
 
 ### Does my spreadsheet need a particular format?
 
