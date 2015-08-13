@@ -11,7 +11,7 @@ var App = React.createClass({
 
 var DataContainer = React.createClass({
   getInitialState: function() {
-    return ({data: Data.datasets});
+    return ({data: []});
   },
   loadData: function() {
     context = this;

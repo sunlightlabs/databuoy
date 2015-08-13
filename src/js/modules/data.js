@@ -4,7 +4,6 @@ var Data = {
     "contactPoint:fn": 'contactPoint',
     "contactPoint:hasEmail": 'contactPoint',
   },
-  datasets: [],
   downloadSpreadsheet: function() {
     var promise = new Promise(function(resolve, reject) {
       spreadsheet_data = null;

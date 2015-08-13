@@ -22405,7 +22405,7 @@ var DataContainer = React.createClass({
   displayName: 'DataContainer',
 
   getInitialState: function getInitialState() {
-    return { data: Data.datasets };
+    return { data: [] };
   },
   loadData: function loadData() {
     context = this;
@@ -23225,7 +23225,6 @@ var Data = {
     "contactPoint:fn": 'contactPoint',
     "contactPoint:hasEmail": 'contactPoint'
   },
-  datasets: [],
   downloadSpreadsheet: function downloadSpreadsheet() {
     var promise = new Promise(function (resolve, reject) {
       spreadsheet_data = null;
