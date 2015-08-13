@@ -23154,7 +23154,7 @@ var Config = {
       callback();
     });
     // Set portal title
-    this.portalName().done(function (data) {
+    this.initializePortalName().done(function (data) {
       self.setPortalName(data);
       Utils.setPageTitle(self.getPortalName());
     });
@@ -23171,11 +23171,6 @@ var Config = {
   getDataLocation: function getDataLocation() {
     return this.data_location;
   },
-  portalName: function portalName() {
-    return $.ajax({
-      url: "portal_name"
-    });
-  },
   isGoogleSheet: function isGoogleSheet() {
     return this.getDataLocation().match('google.com') !== null;
   },
@@ -23185,6 +23180,11 @@ var Config = {
   setPortalName: function setPortalName(portal_name) {
     this.portal_name = portal_name;
     return this.portal_name;
+  },
+  initializePortalName: function initializePortalName() {
+    return $.ajax({
+      url: "portal_name"
+    });
   }
 };
 //# sourceMappingURL=config.js.map
