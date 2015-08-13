@@ -136,10 +136,13 @@ var Dataset = React.createClass({
           </div>
           <div>
             <span className="label">Modified:</span> {this.props.dataset.modified}
-          </div> 
+          </div>
           <div>
-            <span className="label">Keyword:</span> {Utils.parseKeywords(this.props.dataset.keyword)}
-          </div>            
+            <span className="label">Spatial:</span> {this.props.dataset.spatial}
+          </div>
+          <div>
+            <span className="label">Temporal:</span> {this.props.dataset.temporal}
+          </div>
         </div>
         <div>
           <span className="label">Description:</span> {this.props.dataset.description}
@@ -157,6 +160,51 @@ var Dataset = React.createClass({
         </div>
         <div>
           <span className="label">Identifier:</span> {this.props.dataset.identifier}
+        </div>
+        <div>
+          <div>
+            <span className="label">Conforms to:</span> {this.props.dataset.conformsTo}
+          </div>
+          <div>
+            <span className="label">Described by:</span> {this.props.dataset.describedBy}
+          </div>
+          <div>
+            <span className="label">Described by type:</span> {this.props.dataset.describedByType}
+          </div>
+        </div>
+        <div>
+
+          <span className="label">Accrual Periodicity:</span> {this.props.dataset.accrualPeriodicity}
+        </div>
+        <div>
+          <div>
+            <span className="label">Is part of:</span> {this.props.dataset.isPartOf}
+          </div>
+          <div>
+            <span className="label">Keyword:</span> {Utils.parseKeywords(this.props.dataset.keyword)}
+          </div>
+          <div>
+            <span className="label">Theme:</span> {this.props.dataset.theme}
+          </div>
+          <div>
+            <span className="label">Language:</span> {this.props.dataset.language}
+          </div>
+        </div>
+        <div>
+          <div>
+            <span className="label">References:</span> {Utils.parseReferences(this.props.dataset.references)}
+          </div>
+          <div>
+            <span className="label">Landing page:</span> {this.props.dataset.landingPage}
+          </div>
+        </div>
+        <div>
+          <div>
+            <span className="label">Rights:</span> {this.props.dataset.rights}
+          </div>
+          <div>
+            <span className="label">License:</span> {this.props.dataset.license}
+          </div>
         </div>
       </div>
     );

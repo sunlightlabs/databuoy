@@ -7,6 +7,10 @@ var Utils = {
   parseKeywords: function(keyword_array) {
     return keyword_array === undefined ? '' : keyword_array.join(", ");
   },
+  parseReferences: function(reference_array) {
+    // todo: handle links 
+    return reference_array === undefined ? '' : reference_array.join(", ");
+  },
   parseEmail: function(email_string) {
     return email_string.replace("mailto:", "");
   },

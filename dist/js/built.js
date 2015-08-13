@@ -22848,10 +22848,21 @@ var Dataset = React.createClass({
           React.createElement(
             'span',
             { className: "label" },
-            'Keyword:'
+            'Spatial:'
           ),
           ' ',
-          Utils.parseKeywords(this.props.dataset.keyword)
+          this.props.dataset.spatial
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Temporal:'
+          ),
+          ' ',
+          this.props.dataset.temporal
         )
       ),
       React.createElement(
@@ -22897,6 +22908,154 @@ var Dataset = React.createClass({
         ),
         ' ',
         this.props.dataset.identifier
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Conforms to:'
+          ),
+          ' ',
+          this.props.dataset.conformsTo
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Described by:'
+          ),
+          ' ',
+          this.props.dataset.describedBy
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Described by type:'
+          ),
+          ' ',
+          this.props.dataset.describedByType
+        )
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'span',
+          { className: "label" },
+          'Accrual Periodicity:'
+        ),
+        ' ',
+        this.props.dataset.accrualPeriodicity
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Is part of:'
+          ),
+          ' ',
+          this.props.dataset.isPartOf
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Keyword:'
+          ),
+          ' ',
+          Utils.parseKeywords(this.props.dataset.keyword)
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Theme:'
+          ),
+          ' ',
+          this.props.dataset.theme
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Language:'
+          ),
+          ' ',
+          this.props.dataset.language
+        )
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'References:'
+          ),
+          ' ',
+          Utils.parseReferences(this.props.dataset.references)
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Landing page:'
+          ),
+          ' ',
+          this.props.dataset.landingPage
+        )
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'Rights:'
+          ),
+          ' ',
+          this.props.dataset.rights
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'span',
+            { className: "label" },
+            'License:'
+          ),
+          ' ',
+          this.props.dataset.license
+        )
       )
     );
   }
@@ -23040,6 +23199,10 @@ var Utils = {
   },
   parseKeywords: function parseKeywords(keyword_array) {
     return keyword_array === undefined ? '' : keyword_array.join(", ");
+  },
+  parseReferences: function parseReferences(reference_array) {
+    // todo: handle links
+    return reference_array === undefined ? '' : reference_array.join(", ");
   },
   parseEmail: function parseEmail(email_string) {
     return email_string.replace("mailto:", "");
