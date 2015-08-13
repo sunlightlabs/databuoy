@@ -9,6 +9,15 @@ a {
   color: $link-color;
 }
 header {
+  img {
+    width: 200px;
+    height: 200px;
+    float: left;
+  }
+  h1 {
+    line-height: 200px;
+    clear: none;
+  }
   a {
     &:visited {
       color: $font-color;
