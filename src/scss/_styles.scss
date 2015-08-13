@@ -1,14 +1,16 @@
 * {
   word-wrap: break-word;
 }
-div {
-  padding: 10px 0 10px 0;
+html, body {
+  margin: 0px 0px 0px 0px;
+  height: 100%;
 }
 a {
   text-decoration: none;
   color: $link-color;
 }
 header {
+  background: $light-grey;
   img {
     width: 200px;
     height: 200px;
@@ -17,21 +19,42 @@ header {
   h1 {
     line-height: 200px;
     clear: none;
+    margin: 0px;
   }
   a {
+    margin-left: 10px;
     &:visited {
       color: $font-color;
     }
   }
 }
-#app {
+footer {
   width: 100%;
+  background: $light-grey;
+  line-height: $footer-height;
+  text-align: center;
+}
+footer, .push {
+  padding: 0;
+  height: $footer-height;
+  clear: both;
+}
+div#app {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -1*$footer-height;
+  width: 100%;
+  padding: 0;
 }
 #wrapper {
   padding: 0 10px 0 10px;
 }
 #content {
   //display: none;
+  div {
+    padding: 10px 0 10px 0;
+  }
 }
 thead {
   td {
