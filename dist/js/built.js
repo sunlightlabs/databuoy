@@ -22691,7 +22691,7 @@ var DatasetRow = React.createClass({
       React.createElement(
         'td',
         { className: "publisher" },
-        this.props.data.publisher
+        Utils.parsePublisher(this.props.data.publisher)
       ),
       React.createElement(
         'td',
@@ -22829,7 +22829,7 @@ var Dataset = React.createClass({
             'Publisher:'
           ),
           ' ',
-          this.props.dataset.publisher
+          Utils.parsePublisher(this.props.dataset.publisher)
         ),
         React.createElement(
           'div',
@@ -23212,6 +23212,9 @@ var Utils = {
   parseReferences: function parseReferences(reference_array) {
     // todo: handle links
     return reference_array === undefined ? '' : reference_array.join(", ");
+  },
+  parsePublisher: function parsePublisher(publisher) {
+    return publisher === undefined ? '' : publisher.name;
   },
   parseEmail: function parseEmail(email_string) {
     return email_string.replace("mailto:", "");

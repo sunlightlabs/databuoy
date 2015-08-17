@@ -11,6 +11,9 @@ var Utils = {
     // todo: handle links 
     return reference_array === undefined ? '' : reference_array.join(", ");
   },
+  parsePublisher: function(publisher) {
+    return publisher === undefined ? '' : publisher.name;
+  },
   parseEmail: function(email_string) {
     return email_string.replace("mailto:", "");
   },

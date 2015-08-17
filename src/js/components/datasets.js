@@ -89,7 +89,7 @@ var DatasetRow = React.createClass({
         <td className="description hidden">{Utils.parseDescription(this.props.data.description)}</td>
         <td className="keyword">{Utils.parseKeywords(this.props.data.keyword)}</td>
         <td className="modified">{this.props.data.modified}</td>
-        <td className="publisher">{this.props.data.publisher}</td>
+        <td className="publisher">{Utils.parsePublisher(this.props.data.publisher)}</td>
         <td className="identifier">{this.props.data.identifier}</td>
         <td className="accessLevel">{this.props.data.accessLevel}</td>
         <td className="license conditional">{this.props.data.license}</td>
@@ -132,7 +132,7 @@ var Dataset = React.createClass({
             <span className="label">Identifier:</span> {this.props.dataset.identifier}
           </div>
           <div>
-            <span className="label">Publisher:</span> {this.props.dataset.publisher}
+            <span className="label">Publisher:</span> {Utils.parsePublisher(this.props.dataset.publisher)}
           </div>
           <div>
             <span className="label">Modified:</span> {this.props.dataset.modified}
