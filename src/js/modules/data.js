@@ -11,8 +11,7 @@ var Data = {
         tabletop = Tabletop.init({
                     key: Config.getDataLocation(),
                          callback: (function(data, tabletop) {
-                            data_csv = Data.transformGoogleSheet(data);
-                            data_json = Data.convertCSVtoJSON(data_csv);
+                            data_json = Data.convertDataForDatabuoy(data, Config.getDataType());
                             clean_data = Data.cleanDatasets(data_json);
                             resolve(clean_data);
                           }),
@@ -22,7 +21,7 @@ var Data = {
           context: this,
           url: Config.getDataLocation()
         }).done(function(data) {
-          data_json = Data.convertCSVtoJSON(data);
+          data_json = Data.convertDataForDatabuoy(data, Config.getDataType());
           clean_data = Data.cleanDatasets(data_json);
           resolve(clean_data);
         });
@@ -51,6 +50,16 @@ var Data = {
       }
     }
     return false;
+  },
+  convertDataForDatabuoy: function(data, data_type) {
+    if (data_type === 'csv') {
+      return Data.convertCSVtoJSON(data);
+    } else if (data_type === 'json') {
+      return Data.extractDataset(data);
+    } else if (data_type === 'google_sheet') {
+      data_csv = Data.transformGoogleSheet(data);
+      return Data.convertCSVtoJSON(data_csv);
+    }
   },
   convertCSVtoJSON: function(csv) {
     parsed_csv = Papa.parse(csv, {header: true});
@@ -201,5 +210,12 @@ var Data = {
       }
     }
     return dataset;
+  },
+  extractDataset: function(json) {
+    if (json.dataset !== undefined) {
+      return json.dataset;
+    } else {
+      return json;
+    }
   }
 };

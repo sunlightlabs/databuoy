@@ -23171,6 +23171,15 @@ var Config = {
   getDataLocation: function getDataLocation() {
     return this.data_location;
   },
+  getDataType: function getDataType() {
+    location_array = this.data_location.split('.');
+    extension = location_array[location_array.length - 1].toLowerCase();
+    if (Config.isGoogleSheet()) {
+      return 'google_sheet';
+    } else {
+      return extension;
+    }
+  },
   isGoogleSheet: function isGoogleSheet() {
     return this.getDataLocation().match('google.com') !== null;
   },
@@ -23232,8 +23241,7 @@ var Data = {
         tabletop = Tabletop.init({
           key: Config.getDataLocation(),
           callback: function callback(data, tabletop) {
-            data_csv = Data.transformGoogleSheet(data);
-            data_json = Data.convertCSVtoJSON(data_csv);
+            data_json = Data.convertDataForDatabuoy(data, Config.getDataType());
             clean_data = Data.cleanDatasets(data_json);
             resolve(clean_data);
           },
@@ -23243,7 +23251,7 @@ var Data = {
           context: this,
           url: Config.getDataLocation()
         }).done(function (data) {
-          data_json = Data.convertCSVtoJSON(data);
+          data_json = Data.convertDataForDatabuoy(data, Config.getDataType());
           clean_data = Data.cleanDatasets(data_json);
           resolve(clean_data);
         });
@@ -23273,6 +23281,16 @@ var Data = {
       }
     }
     return false;
+  },
+  convertDataForDatabuoy: function convertDataForDatabuoy(data, data_type) {
+    if (data_type === 'csv') {
+      return Data.convertCSVtoJSON(data);
+    } else if (data_type === 'json') {
+      return Data.extractDataset(data);
+    } else if (data_type === 'google_sheet') {
+      data_csv = Data.transformGoogleSheet(data);
+      return Data.convertCSVtoJSON(data_csv);
+    }
   },
   convertCSVtoJSON: function convertCSVtoJSON(csv) {
     parsed_csv = Papa.parse(csv, { header: true });
@@ -23422,6 +23440,13 @@ var Data = {
       }
     }
     return dataset;
+  },
+  extractDataset: function extractDataset(json) {
+    if (json.dataset !== undefined) {
+      return json.dataset;
+    } else {
+      return json;
+    }
   }
 };
 //# sourceMappingURL=data.js.map

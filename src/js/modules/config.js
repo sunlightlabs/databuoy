@@ -30,6 +30,15 @@ var Config = {
   getDataLocation: function() {
     return this.data_location;
   },
+  getDataType: function() {
+    location_array = this.data_location.split('.');
+    extension = location_array[location_array.length - 1].toLowerCase();
+    if (Config.isGoogleSheet()) {
+      return 'google_sheet';
+    } else {
+      return extension;
+    }
+  },
   isGoogleSheet: function() {
     return this.getDataLocation().match('google.com') !== null;
   },
