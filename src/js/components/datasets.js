@@ -115,6 +115,52 @@ var DatasetRow = React.createClass({
 
 var Dataset = React.createClass({
   render: function() {
+    return (
+      <div id="dataset">
+        <h2>{this.props.dataset.title}</h2>
+        <div>
+          <Property label='Identifier' value={this.props.dataset.identifier} />
+          <Property label='Publisher' value={Utils.parsePublisher(this.props.dataset.publisher)} />
+          <Property label='Modified' value={this.props.dataset.modified} />
+          <Property label='Spatial' value={this.props.dataset.spatial} />
+          <Property label='Temporal' value={this.props.dataset.temporal} />
+        </div>
+        <Property label='Description' value={this.props.dataset.description} />
+        <Distributions dataset={this.props.dataset} />
+        <ContactPoint contactPoint={this.props.dataset.contactPoint} />
+        <div>
+          <Property label='Access Level' value={this.props.dataset.accessLevel} />          
+        </div>
+        <Property label='Identifier' value={this.props.dataset.identifier} />
+        <div>
+          <Property label='Conforms to' value={this.props.dataset.conformsTo} />
+          <Property label='Described by' value={this.props.dataset.describedBy} />
+          <Property label='Described by type' value={this.props.dataset.describedByType} />
+        </div>
+        <div>
+          <Property label='Accrual Periodicity:' value={this.props.dataset.accrualPeriodicity} />
+        </div>
+        <div>
+          <Property label='Is part of' value={this.props.dataset.isPartOf} />
+          <Property label='Keyword' value={Utils.parseKeywords(this.props.dataset.keyword)} />
+          <Property label='Theme' value={this.props.dataset.theme} />
+          <Property label='Language' value={this.props.dataset.language} />
+        </div>
+        <div>
+          <Property label='References' value={Utils.parseReferences(this.props.dataset.references)} />
+          <Property label='Landing page' value={this.props.dataset.landingPage} />
+        </div>
+        <div>
+          <Property label='Rights' value={this.props.dataset.rights} />
+          <Property label='License' value={this.props.dataset.license} />
+        </div>
+      </div>
+    );
+  }
+});
+
+var Distributions = React.createClass({
+  render: function() {
     if (this.props.dataset && this.props.dataset.distribution) {
       var distributions = this.props.dataset.distribution.map(function (distribution) {
         return (
@@ -124,90 +170,17 @@ var Dataset = React.createClass({
     } else {
       distributions = []
     }
-    return (
-      <div id="dataset">
-        <h2>{this.props.dataset.title}</h2>
+    if (distributions.length > 0) {
+      return (
         <div>
-          <div>
-            <span className="label">Identifier:</span> {this.props.dataset.identifier}
-          </div>
-          <div>
-            <span className="label">Publisher:</span> {Utils.parsePublisher(this.props.dataset.publisher)}
-          </div>
-          <div>
-            <span className="label">Modified:</span> {this.props.dataset.modified}
-          </div>
-          <div>
-            <span className="label">Spatial:</span> {this.props.dataset.spatial}
-          </div>
-          <div>
-            <span className="label">Temporal:</span> {this.props.dataset.temporal}
-          </div>
+          <h3>Distributions</h3>
+          {distributions}
+          <div className="clear" />
         </div>
-        <div>
-          <span className="label">Description:</span> {this.props.dataset.description}
-        </div>
-        {distributions.length > 0 ?
-          <div>
-            <h3>Distributions</h3>
-            {distributions}
-            <div className="clear" />
-          </div> : null}
-        <ContactPoint contactPoint={this.props.dataset.contactPoint} />
-        <div>
-          <h3>Access Level:</h3>
-          {this.props.dataset.accessLevel}
-        </div>
-        <div>
-          <span className="label">Identifier:</span> {this.props.dataset.identifier}
-        </div>
-        <div>
-          <div>
-            <span className="label">Conforms to:</span> {this.props.dataset.conformsTo}
-          </div>
-          <div>
-            <span className="label">Described by:</span> {this.props.dataset.describedBy}
-          </div>
-          <div>
-            <span className="label">Described by type:</span> {this.props.dataset.describedByType}
-          </div>
-        </div>
-        <div>
-
-          <span className="label">Accrual Periodicity:</span> {this.props.dataset.accrualPeriodicity}
-        </div>
-        <div>
-          <div>
-            <span className="label">Is part of:</span> {this.props.dataset.isPartOf}
-          </div>
-          <div>
-            <span className="label">Keyword:</span> {Utils.parseKeywords(this.props.dataset.keyword)}
-          </div>
-          <div>
-            <span className="label">Theme:</span> {this.props.dataset.theme}
-          </div>
-          <div>
-            <span className="label">Language:</span> {this.props.dataset.language}
-          </div>
-        </div>
-        <div>
-          <div>
-            <span className="label">References:</span> {Utils.parseReferences(this.props.dataset.references)}
-          </div>
-          <div>
-            <span className="label">Landing page:</span> {this.props.dataset.landingPage}
-          </div>
-        </div>
-        <div>
-          <div>
-            <span className="label">Rights:</span> {this.props.dataset.rights}
-          </div>
-          <div>
-            <span className="label">License:</span> {this.props.dataset.license}
-          </div>
-        </div>
-      </div>
-    );
+      )
+    } else {
+      return null
+    }
   }
 });
 
@@ -217,14 +190,7 @@ var Distribution = React.createClass({
     for (var key in this.props.attributes) {
       if (this.props.attributes.hasOwnProperty(key)) {
         attributes.push(
-          <div className="distribution_attribute">
-            <span className="label">
-              {key}: 
-            </span>
-            <span>
-              {this.props.attributes[key]}
-            </span>
-          </div>
+          <Property className="distribution_attribute" label={key} value={this.props.attributes[key]} />
         )
       }
     }
@@ -252,5 +218,19 @@ var ContactPoint = React.createClass({
         </div>
       </div>
     )
+  }
+})
+
+var Property = React.createClass({
+  render: function() {
+    if (this.props.value) {
+      return ( <div>
+                 <span className="label">{this.props.label}: </span> {this.props.value}
+               </div> )
+    } else {
+      return (
+        null
+      )
+    }
   }
 })

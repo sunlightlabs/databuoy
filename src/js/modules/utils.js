@@ -1,8 +1,13 @@
 var Utils = {
   parseStringToArray: function(string) {
-    return string.split(",").map(function (dataset) {
+    array = string.split(",").map(function (dataset) {
       return dataset.trim();
     });
+    if (array.length > 0 && array[0] !== "") {
+      return array;
+    } else {
+      return undefined;
+    }
   },
   parseKeywords: function(keyword_array) {
     return keyword_array === undefined ? '' : keyword_array.join(", ");

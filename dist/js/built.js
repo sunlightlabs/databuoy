@@ -22791,13 +22791,6 @@ var Dataset = React.createClass({
   displayName: 'Dataset',
 
   render: function render() {
-    if (this.props.dataset && this.props.dataset.distribution) {
-      var distributions = this.props.dataset.distribution.map(function (distribution) {
-        return React.createElement(Distribution, { className: "distribution", attributes: distribution });
-      });
-    } else {
-      distributions = [];
-    }
     return React.createElement(
       'div',
       { id: "dataset" },
@@ -22809,74 +22802,70 @@ var Dataset = React.createClass({
       React.createElement(
         'div',
         null,
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Identifier:'
-          ),
-          ' ',
-          this.props.dataset.identifier
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Publisher:'
-          ),
-          ' ',
-          Utils.parsePublisher(this.props.dataset.publisher)
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Modified:'
-          ),
-          ' ',
-          this.props.dataset.modified
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Spatial:'
-          ),
-          ' ',
-          this.props.dataset.spatial
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Temporal:'
-          ),
-          ' ',
-          this.props.dataset.temporal
-        )
+        React.createElement(Property, { label: 'Identifier', value: this.props.dataset.identifier }),
+        React.createElement(Property, { label: 'Publisher', value: Utils.parsePublisher(this.props.dataset.publisher) }),
+        React.createElement(Property, { label: 'Modified', value: this.props.dataset.modified }),
+        React.createElement(Property, { label: 'Spatial', value: this.props.dataset.spatial }),
+        React.createElement(Property, { label: 'Temporal', value: this.props.dataset.temporal })
+      ),
+      React.createElement(Property, { label: 'Description', value: this.props.dataset.description }),
+      React.createElement(Distributions, { dataset: this.props.dataset }),
+      React.createElement(ContactPoint, { contactPoint: this.props.dataset.contactPoint }),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(Property, { label: 'Access Level', value: this.props.dataset.accessLevel })
+      ),
+      React.createElement(Property, { label: 'Identifier', value: this.props.dataset.identifier }),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(Property, { label: 'Conforms to', value: this.props.dataset.conformsTo }),
+        React.createElement(Property, { label: 'Described by', value: this.props.dataset.describedBy }),
+        React.createElement(Property, { label: 'Described by type', value: this.props.dataset.describedByType })
       ),
       React.createElement(
         'div',
         null,
-        React.createElement(
-          'span',
-          { className: "label" },
-          'Description:'
-        ),
-        ' ',
-        this.props.dataset.description
+        React.createElement(Property, { label: 'Accrual Periodicity:', value: this.props.dataset.accrualPeriodicity })
       ),
-      distributions.length > 0 ? React.createElement(
+      React.createElement(
+        'div',
+        null,
+        React.createElement(Property, { label: 'Is part of', value: this.props.dataset.isPartOf }),
+        React.createElement(Property, { label: 'Keyword', value: Utils.parseKeywords(this.props.dataset.keyword) }),
+        React.createElement(Property, { label: 'Theme', value: this.props.dataset.theme }),
+        React.createElement(Property, { label: 'Language', value: this.props.dataset.language })
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(Property, { label: 'References', value: Utils.parseReferences(this.props.dataset.references) }),
+        React.createElement(Property, { label: 'Landing page', value: this.props.dataset.landingPage })
+      ),
+      React.createElement(
+        'div',
+        null,
+        React.createElement(Property, { label: 'Rights', value: this.props.dataset.rights }),
+        React.createElement(Property, { label: 'License', value: this.props.dataset.license })
+      )
+    );
+  }
+});
+
+var Distributions = React.createClass({
+  displayName: 'Distributions',
+
+  render: function render() {
+    if (this.props.dataset && this.props.dataset.distribution) {
+      var distributions = this.props.dataset.distribution.map(function (distribution) {
+        return React.createElement(Distribution, { className: "distribution", attributes: distribution });
+      });
+    } else {
+      distributions = [];
+    }
+    if (distributions.length > 0) {
+      return React.createElement(
         'div',
         null,
         React.createElement(
@@ -22886,178 +22875,10 @@ var Dataset = React.createClass({
         ),
         distributions,
         React.createElement('div', { className: "clear" })
-      ) : null,
-      React.createElement(ContactPoint, { contactPoint: this.props.dataset.contactPoint }),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'h3',
-          null,
-          'Access Level:'
-        ),
-        this.props.dataset.accessLevel
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'span',
-          { className: "label" },
-          'Identifier:'
-        ),
-        ' ',
-        this.props.dataset.identifier
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Conforms to:'
-          ),
-          ' ',
-          this.props.dataset.conformsTo
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Described by:'
-          ),
-          ' ',
-          this.props.dataset.describedBy
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Described by type:'
-          ),
-          ' ',
-          this.props.dataset.describedByType
-        )
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'span',
-          { className: "label" },
-          'Accrual Periodicity:'
-        ),
-        ' ',
-        this.props.dataset.accrualPeriodicity
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Is part of:'
-          ),
-          ' ',
-          this.props.dataset.isPartOf
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Keyword:'
-          ),
-          ' ',
-          Utils.parseKeywords(this.props.dataset.keyword)
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Theme:'
-          ),
-          ' ',
-          this.props.dataset.theme
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Language:'
-          ),
-          ' ',
-          this.props.dataset.language
-        )
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'References:'
-          ),
-          ' ',
-          Utils.parseReferences(this.props.dataset.references)
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Landing page:'
-          ),
-          ' ',
-          this.props.dataset.landingPage
-        )
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'Rights:'
-          ),
-          ' ',
-          this.props.dataset.rights
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'span',
-            { className: "label" },
-            'License:'
-          ),
-          ' ',
-          this.props.dataset.license
-        )
-      )
-    );
+      );
+    } else {
+      return null;
+    }
   }
 });
 
@@ -23068,21 +22889,7 @@ var Distribution = React.createClass({
     var attributes = [];
     for (var key in this.props.attributes) {
       if (this.props.attributes.hasOwnProperty(key)) {
-        attributes.push(React.createElement(
-          'div',
-          { className: "distribution_attribute" },
-          React.createElement(
-            'span',
-            { className: "label" },
-            key,
-            ':'
-          ),
-          React.createElement(
-            'span',
-            null,
-            this.props.attributes[key]
-          )
-        ));
+        attributes.push(React.createElement(Property, { className: "distribution_attribute", label: key, value: this.props.attributes[key] }));
       }
     }
     return React.createElement(
@@ -23132,6 +22939,29 @@ var ContactPoint = React.createClass({
         this.props.contactPoint && Utils.parseEmail(this.props.contactPoint.hasEmail)
       )
     );
+  }
+});
+
+var Property = React.createClass({
+  displayName: 'Property',
+
+  render: function render() {
+    if (this.props.value) {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'span',
+          { className: "label" },
+          this.props.label,
+          ': '
+        ),
+        ' ',
+        this.props.value
+      );
+    } else {
+      return null;
+    }
   }
 });
 /* The && is a pretty gross way to not error out when contactPoint hasn't yet been defined */
@@ -23202,9 +23032,14 @@ var Config = {
 
 var Utils = {
   parseStringToArray: function parseStringToArray(string) {
-    return string.split(",").map(function (dataset) {
+    array = string.split(",").map(function (dataset) {
       return dataset.trim();
     });
+    if (array.length > 0 && array[0] !== "") {
+      return array;
+    } else {
+      return undefined;
+    }
   },
   parseKeywords: function parseKeywords(keyword_array) {
     return keyword_array === undefined ? '' : keyword_array.join(", ");
