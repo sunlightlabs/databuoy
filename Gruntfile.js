@@ -73,14 +73,20 @@ module.exports = function(grunt) {
     },
     clean: {
       build: ['tmp']
-    }
+    },
+    serve: {
+      options: {
+          port: 9000
+      },
+    },
   });
 
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks('grunt-serve');
   grunt.loadNpmTasks('grunt-contrib-clean');  
   grunt.registerTask('build', ['babel', 'sass', 'concat']);
-  grunt.registerTask('default', ['build', 'clean', 'watch']);
+  grunt.registerTask('default', ['build', 'clean', 'serve', 'watch']);
 };
