@@ -2,8 +2,6 @@
 
 [Wiki](https://github.com/sunlightlabs/databuoy/wiki) | [Contributing](https://github.com/sunlightlabs/databuoy/blob/gh-pages/CONTRIBUTING.md) | [Development Setup](https://github.com/sunlightlabs/databuoy/blob/gh-pages/SETUP.md) 
 
-***
-
 ![Harbor Buoy](https://farm4.staticflickr.com/3532/3832384357_bb2e224f77_z.jpg)
 
 _Image courtesy of Isaac Wedin under the Creative Commons [Attribution 2.0 Generic](https://creativecommons.org/licenses/by/2.0/) license_
