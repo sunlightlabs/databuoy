@@ -6,4 +6,4 @@ If you don't write code, you can contribute to this project by letting us know a
 
 ## Technical Contributions
 
-We're using GitHub's [issue tracker](https://github.com/sunlightlabs/databuoy/issues) to prioritize development tasks. Feel free to pick off an issue, fork a repo, fix it, and send a pull request.
+We're using GitHub's [issue tracker](https://github.com/sunlightlabs/databuoy/issues) to prioritize development tasks. Feel free to pick off an issue, fork a repo, fix it, and send a pull request. For help setting up your development environment, click [here](https://github.com/sunlightlabs/databuoy/blob/gh-pages/SETUP.md).
