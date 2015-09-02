@@ -1,7 +1,8 @@
 # Databuoy
 
 [Wiki](https://github.com/sunlightlabs/databuoy/wiki) | [Contributing](https://github.com/sunlightlabs/databuoy/blob/gh-pages/CONTRIBUTING.md) | [Development Setup](https://github.com/sunlightlabs/databuoy/blob/gh-pages/SETUP.md) 
----
+
+***
 
 ![Harbor Buoy](https://farm4.staticflickr.com/3532/3832384357_bb2e224f77_z.jpg)
 
