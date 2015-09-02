@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                 'src/js/*.js',
                 'src/scss/*.scss'],
         tasks: ['sass', 'concat', 'build']
-      }
+      },
     },
     babel: {
         options: {
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
         'tmp/js/modules/routes.js',
         'tmp/js/interactions.js',
         'tmp/js/main.js'],
-        dest: 'dist/js/built.js',
+        dest: 'tmp/js/built.js',
       },
       css: {
         src: ['bower_components/pure/pure-min.css',
@@ -71,22 +71,33 @@ module.exports = function(grunt) {
         dest: 'dist/css/app.min.css'
       }
     },
+    uglify: {
+      js: {
+        files: {
+          'dist/js/built.min.js': ['tmp/js/built.js']
+        }
+      }
+    },
     clean: {
       build: ['tmp']
     },
-    serve: {
-      options: {
-          port: 9000
-      },
-    },
+    connect: {
+      server: {
+        options: {
+          port: 8000,
+          hostname: '*',
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-babel');
-  grunt.loadNpmTasks('grunt-serve');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-clean');  
-  grunt.registerTask('build', ['babel', 'sass', 'concat']);
-  grunt.registerTask('default', ['build', 'clean', 'serve', 'watch']);
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.registerTask('build', ['babel', 'sass', 'concat', 'uglify']);
+  grunt.registerTask('default', ['connect', 'build', 'clean', 'watch']);
 };
