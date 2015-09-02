@@ -1,6 +1,6 @@
 # Databuoy
 
-[Wiki](https://github.com/sunlightlabs/databuoy/wiki) | [Contributing](https://github.com/sunlightlabs/databuoy/blob/gh-pages/CONTRIBUTING.md) | [Development Setup](https://github.com/sunlightlabs/databuoy/blob/gh-pages/SETUP.md) 
+Important links: [Info and Guides](https://github.com/sunlightlabs/databuoy/wiki) | [Contributing](https://github.com/sunlightlabs/databuoy/blob/gh-pages/CONTRIBUTING.md) | [Development Setup](https://github.com/sunlightlabs/databuoy/blob/gh-pages/SETUP.md) 
 
 ![Harbor Buoy](https://farm4.staticflickr.com/3532/3832384357_bb2e224f77_z.jpg)
 
@@ -33,3 +33,7 @@ Check out our setup guides for [developers](https://github.com/sunlightlabs/data
 ### Exports
 
 Databuoy can export to the [Project Open Data Metadata Schema (v1.1)](https://project-open-data.cio.gov/v1.1/schema/), but the [official converters](http://labs.data.gov/dashboard/datagov/csv_to_json) are a better route.
+
+### Contributing
+
+Check out our [Contributing](https://github.com/sunlightlabs/databuoy/blob/gh-pages/CONTRIBUTING.md) and [Development Setup](https://github.com/sunlightlabs/databuoy/blob/gh-pages/SETUP.md) guides.
