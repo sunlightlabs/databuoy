@@ -6,6 +6,8 @@ Important links: [Info and Guides](https://github.com/sunlightlabs/databuoy/wiki
 
 _Image courtesy of Isaac Wedin under the Creative Commons [Attribution 2.0 Generic](https://creativecommons.org/licenses/by/2.0/) license_
 
+## What Is Databuoy?
+
 Databuoy is a spreadsheet-backed data catalog that anyone can put online for free. It helps organizations compile a machine-readable data inventory while simultaneously creating a public website that presents it.  With Databuoy, [this spreadsheet](https://docs.google.com/spreadsheets/d/16bk6mScsXWpd-KX80Jn2Qzj1q_vyeFfCQBeWMdBi2nE/edit#gid=0) turns into [this website](http://sunlightlabs.github.io/databuoy/).
 
 If you're a developer, you can read about deployment [here](https://github.com/sunlightlabs/databuoy/wiki/Setup-(for-developers)). If not, you can deploy the site too! Read on!
