@@ -73,7 +73,6 @@ var Data = {
           dataset[dataset.length - 1] = cache_row;
         } else {
           row_obj = {}; // Build a new row from scratch
-          row_distribution_processed = false;
           for (var key in parsed_csv.data[i]) {
             if (parsed_csv.data[i].hasOwnProperty(key)) {
               if (this.keyGroup(key) && this.keyGroupHasNotBeenProcessed(key, row_obj)) {
